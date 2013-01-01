@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Tech - Mes Réalisations</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Variables CSS pour les thèmes */
+        :root {
+            --primary-color: #2196F3; /* Bleu */
+            --secondary-color: #FFFFFF; /* Blanc */
+            --bg-color: #FFFFFF;
+            --text-color: #333333;
+            --card-bg: #F5F5F5;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --header-bg: rgba(255, 255, 255, 0.95);
+            --footer-bg: #000000;
+            --border-color: #e0e0e0;
+            --active-menu-color: #2196F3;
+        }
+
+        .dark-mode {
+            --primary-color: #64B5F6;
+            --secondary-color: #121212;
+            --bg-color: #121212;
+            --text-color: #E0E0E0;
+            --card-bg: #1E1E1E;
+            --shadow: rgba(0, 0, 0, 0.3);
+            --header-bg: rgba(30, 30, 30, 0.95);
+            --footer-bg: #000000;
+            --border-color: #333333;
+            --active-menu-color: #64B5F6;
+        }
+
+        /* Reset et styles de base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* En-tête et navigation */
+        header {
+            background-color: var(--header-bg);
+            box-shadow: 0 2px 10px var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        nav ul {
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s;
+        }
+
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+
+        nav ul li a.active {
+            color: var(--active-menu-color);
+            font-weight: 600;
+        }
+
+        nav ul li a.active:after {
+            width: 100%;
+            background-color: var(--active-menu-color);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--text-color);
+            margin-left: 20px;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+
+        /* Sections avec animations au défilement */
+        section {
+            padding: 120px 0 80px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s, transform 0.8s;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Section Réalisations */
+        .realisations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .realisation-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            border: 1px solid var(--border-color);
+        }
+
+        .realisation-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px var(--shadow);
+        }
+
+        .realisation-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .realisation-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .realisation-card p {
+            margin-bottom: 20px;
+            flex-grow: 1;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .realisation-features {
+            text-align: left;
+            margin-bottom: 25px;
+        }
+
+        .realisation-features li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        .realisation-features li i {
+            color: var(--primary-color);
+            margin-right: 10px;
+            font-size: 0.8rem;
+        }
+
+        .interest-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: pointer;
+            margin-top: auto;
+            font-size: 0.9rem;
+        }
+
+        .interest-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .section-footer {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .btn-more {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-more:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Pied de page */
+        footer {
+            background-color: var(--footer-bg);
+            padding: 60px 0 30px;
+            color: white;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            font-size: 1.3rem;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-wrap: wrap;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav {
+                width: 100%;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s;
+            }
+            
+            nav.active {
+                max-height: 300px;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                padding: 20px 0;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+                margin-left: 0;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .realisations-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+
+            section {
+                padding: 100px 0 60px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .realisation-card {
+                padding: 20px;
+            }
+            
+            .realisation-icon {
+                font-size: 2.5rem;
+                height: 60px;
+            }
+            
+            .realisation-card h3 {
+                font-size: 1.3rem;
+                min-height: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- En-tête avec navigation -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-container">
+                    <div class="logo-img">ET</div>
+                    <div class="logo">E-Tech</div>
+                </div>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav>
+                    <ul>
+                        <li><a href="../index.html" class="nav-link">Accueil</a></li>
+                        <li><a href="../index.html#services" class="nav-link">Services</a></li>
+                        <li><a href="formations" class="nav-link">Formation</a></li>
+                        <li><a href="projets.html" class="nav-link">Projets</a></li>
+                        <li><a href="realisations.html" class="nav-link active">Réalisations</a></li>
+                        <li><a href="../index.html#blog" class="nav-link">Blog</a></li>
+                        <li><a href="../index.html#apropos" class="nav-link">À Propos</a></li>
+                    </ul>
+                </nav>
+                <button class="theme-toggle">
+                    <i class="fas fa-bolt"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Section Nos Réalisations -->
+    <section id="realisations" class="realisations">
+        <div class="container">
+            <h2 class="section-title fade-in">Mes Réalisations</h2>
+            <div class="realisations-grid">
+                <!-- Réalisation 1 -->
+                <div class="realisation-card fade-in">
+                    <div class="realisation-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Plateforme de Gestion des Résultats Scolaires</h3>
+                    <p>Pour le SERNIE Ngandajika - Une solution complète permettant aux établissements scolaires de gérer efficacement les résultats des élèves avec des rapports détaillés et des analyses statistiques.</p>
+                    <ul class="realisation-features">
+                        <li><i class="fas fa-check"></i> Gestion centralisée des données élèves</li>
+                        <li><i class="fas fa-check"></i> Génération automatique des bulletins</li>
+                        <li><i class="fas fa-check"></i> Tableaux de bord pour enseignants et administration</li>
+                        <li><i class="fas fa-check"></i> Accès sécurisé pour les parents</li>
+                    </ul>
+                    <button class="interest-btn">Voir les détails</button>
+                </div>
+
+                <!-- Réalisation 2 -->
+                <div class="realisation-card fade-in">
+                    <div class="realisation-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Plateforme pour Missionnaires</h3>
+                    <p>Pour les Missionnaires de l'Immaculée Conception - Un système intégré de gestion des inscriptions en ligne et de cours à distance spécialement conçu pour les besoins des communautés missionnaires.</p>
+                    <ul class="realisation-features">
+                        <li><i class="fas fa-check"></i> Inscriptions en ligne simplifiées</li>
+                        <li><i class="fas fa-check"></i> Plateforme de cours à distance interactive</li>
+                        <li><i class="fas fa-check"></i> Gestion des étudiants et du personnel</li>
+                        <li><i class="fas fa-check"></i> Système de messagerie intégré</li>
+                    </ul>
+                    <button class="interest-btn">Voir les détails</button>
+                </div>
+
+                <!-- Réalisation 3 -->
+                <div class="realisation-card fade-in">
+                    <div class="realisation-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>Base de Données de Délibération Automatique</h3>
+                    <p>Pour le Centre Éducatif Catholique La Robertanna - Une solution innovante automatisant le processus de délibération avec des algorithmes intelligents pour une évaluation précise et équitable des étudiants.</p>
+                    <ul class="realisation-features">
+                        <li><i class="fas fa-check"></i> Algorithmes de calcul automatique des notes</li>
+                        <li><i class="fas fa-check"></i> Génération des procès-verbaux de délibération</li>
+                        <li><i class="fas fa-check"></i> Historique complet des décisions</li>
+                        <li><i class="fas fa-check"></i> Interface intuitive pour les enseignants</li>
+                    </ul>
+                    <button class="interest-btn">Voir les détails</button>
+                </div>
+
+                <!-- Réalisation 4 -->
+                <div class="realisation-card fade-in">
+                    <div class="realisation-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h3>Site E-commerce</h3>
+                    <p>Plateforme de vente en ligne complète avec gestion des stocks, paiements sécurisés et interface administrateur avancée pour une boutique de vêtements.</p>
+                    <ul class="realisation-features">
+                        <li><i class="fas fa-check"></i> Design responsive et moderne</li>
+                        <li><i class="fas fa-check"></i> Intégration de passerelles de paiement</li>
+                        <li><i class="fas fa-check"></i> Système de gestion des commandes</li>
+                        <li><i class="fas fa-check"></i> Optimisation pour le référencement</li>
+                    </ul>
+                    <button class="interest-btn">Voir les détails</button>
+                </div>
+
+                <!-- Réalisation 5 -->
+                <div class="realisation-card fade-in">
+                    <div class="realisation-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Application Mobile</h3>
+                    <p>Application cross-platform pour la gestion des tâches et la productivité avec synchronisation cloud et fonctionnalités hors ligne.</p>
+                    <ul class="realisation-features">
+                        <li><i class="fas fa-check"></i> Développement React Native</li>
+                        <li><i class="fas fa-check"></i> Interface utilisateur intuitive</li>
+                        <li><i class="fas fa-check"></i> Synchronisation en temps réel</li>
+                        <li><i class="fas fa-check"></i> Fonctionnalités hors ligne</li>
+                    </ul>
+                    <button class="interest-btn">Voir les détails</button>
+                </div>
+
+                <!-- Réalisation 6 -->
+                <div class="realisation-card fade-in">
+                    <div class="realisation-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Tableau de Bord Analytics</h3>
+                    <p>Solution de business intelligence avec visualisation de données et rapports personnalisables pour une entreprise de marketing digital.</p>
+                    <ul class="realisation-features">
+                        <li><i class="fas fa-check"></i> Visualisations interactives</li>
+                        <li><i class="fas fa-check"></i> Intégration de multiples sources de données</li>
+                        <li><i class="fas fa-check"></i> Rapports automatisés</li>
+                        <li><i class="fas fa-check"></i> Tableaux de bord personnalisables</li>
+                    </ul>
+                    <button class="interest-btn">Voir les détails</button>
+                </div>
+            </div>
+            <div class="section-footer">
+                <a href="../index.html" class="btn-more">Retour à l'accueil</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pied de page -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>E-Tech</h3>
+                    <p>Solutions technologiques innovantes développées par Ir Etienne. Expertise en développement web, applications mobiles et systèmes d'information.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Liens Rapides</h3>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="index.html#services">Services</a></li>
+                        <li><a href="index.html#formation">Formation</a></li>
+                        <li><a href="projets.html">Projets</a></li>
+                        <li><a href="realisations.html">Réalisations</a></li>
+                        <li><a href="index.html#blog">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#">Développement Web</a></li>
+                        <li><a href="#">Applications Mobiles</a></li>
+                        <li><a href="#">Systèmes de Gestion</a></li>
+                        <li><a href="#">Solutions Cloud</a></li>
+                        <li><a href="#">Consultation IT</a></li>
+                        <li><a href="#">Formation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Ngandajika, DR Congo</li>
+                        <li><i class="fas fa-phone"></i> +243 89 121 96 24</li>
+                        <li><i class="fas fa-envelope"></i> kalangaetienne@gmail.com</li>
+                        <li><i class="fas fa-envelope"></i> Iretiennekalanga@hotmail.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 E-Tech. Tous droits réservés. Développé par Ir Etienne</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Gestion du mode sombre/clair
+        function initThemeToggle() {
+            const themeToggle = document.querySelector('.theme-toggle');
+            const icon = themeToggle.querySelector('i');
+            
+            themeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('dark-mode');
+                
+                if (document.body.classList.contains('dark-mode')) {
+                    icon.className = 'fas fa-sun';
+                } else {
+                    icon.className = 'fas fa-bolt';
+                }
+                
+                localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+            });
+            
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                icon.className = 'fas fa-sun';
+            }
+        }
+
+        // Gestion du menu mobile
+        function initMobileMenu() {
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const nav = document.querySelector('nav');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                nav.classList.toggle('active');
+                mobileMenuBtn.querySelector('i').className = nav.classList.contains('active') ? 'fas fa-times' : 'fas fa-bars';
+            });
+            
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    nav.classList.remove('active');
+                    mobileMenuBtn.querySelector('i').className = 'fas fa-bars';
+                });
+            });
+        }
+
+        // Animation au défilement
+        function initScrollAnimations() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            fadeElements.forEach(element => {
+                observer.observe(element);
+            });
+        }
+
+        // Gestion des boutons "Voir les détails"
+        function initDetailButtons() {
+            const interestButtons = document.querySelectorAll('.interest-btn');
+            
+            interestButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const realisationTitle = button.parentElement.querySelector('h3').textContent;
+                    alert(`Détails de la réalisation: "${realisationTitle}"\n\nCette fonctionnalité affichera les détails complets du projet dans une future version.`);
+                });
+            });
+        }
+
+        // Initialisation de toutes les fonctionnalités
+        document.addEventListener('DOMContentLoaded', () => {
+            initThemeToggle();
+            initMobileMenu();
+            initScrollAnimations();
+            initDetailButtons();
+        });
+
+        // Gestion du défilement fluide pour les ancres
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
