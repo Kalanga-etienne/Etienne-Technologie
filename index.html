@@ -344,7 +344,7 @@
         .about-image {
             flex: 1;
             max-width: 400px;
-            border-radius: 10px;
+            border-radius: 50%;
             overflow: hidden;
             box-shadow: 0 10px 30px var(--shadow);
         }
@@ -723,6 +723,52 @@
             margin-right: 10px;
         }
 
+        /* Section Vidéo de Présentation */
+        .video-presentation {
+            background-color: var(--card-bg);
+            padding: 80px 0;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px var(--shadow);
+        }
+
+        .video-container iframe {
+            display: block;
+            border-radius: 10px;
+        }
+
+        .video-description {
+            max-width: 900px;
+            margin: 0 auto 40px;
+            text-align: center;
+        }
+
+        .video-description p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .video-conclusion {
+            max-width: 900px;
+            margin: 40px auto 0;
+            text-align: center;
+        }
+
+        .video-conclusion p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            font-style: italic;
+            color: var(--primary-color);
+        }
+
         /* Pied de page - Harmonisation */
         footer {
             background-color: var(--footer-bg);
@@ -880,6 +926,10 @@
                 font-size: 1rem;
             }
             
+            .video-container iframe {
+                height: 400px;
+            }
+            
             .footer-content {
                 grid-template-columns: 1fr;
                 text-align: center;
@@ -905,6 +955,14 @@
             
             .about-image {
                 max-width: 100%;
+            }
+            
+            .video-container iframe {
+                height: 250px;
+            }
+            
+            .video-description p, .video-conclusion p {
+                font-size: 1rem;
             }
         }
     </style>
@@ -966,6 +1024,25 @@
             </div>
         </section>
 
+     <!-- Section À Propos -->
+    <section id="apropos" class="about">
+        <div class="container">
+            <h2 class="section-title fade-in">À Propos de Moi</h2>
+            <div class="about-content">
+                <div class="about-image fade-in">
+                    <img src="images/autres/profil.jpg" alt="Ir Etienne">
+                </div>
+                <div class="about-text fade-in">
+                    <p>je m'appelle Etienne KALANGA MPIANA, un informaticien passionné par les nouvelles technologies et l'innovation digitale. Fort de plusieurs années d'expérience dans le domaine, je mets mon expertise au service de vos projets.</p>
+                    <p>Je suis un informaticien polyvalent avec une expertise dans l'installation et la maintenance des systèmes, incluant la maîtrise des environnements, ainsi que le dépannage matériel et logiciel.</p>
+                    <p>Ma mission est de créer des solutions technologiques qui répondent parfaitement à vos besoins, en alliant performance, esthétique et fonctionnalité.</p>
+                    <a href="pages/apropos.html" class="read-more">En savoir plus sur moi</a>
+                </div>
+            </div>
+        </div>
+    </section>
+ 
+ 
         <!-- Section Services (sur la page d'accueil) -->
         <section id="services" class="services">
             <div class="container">
@@ -1163,20 +1240,27 @@
     </div>
 
 
-    <!-- Section À Propos -->
-    <section id="apropos" class="about">
+    <!-- Section Vidéo de Présentation -->
+    <section id="video" class="video-presentation">
         <div class="container">
-            <h2 class="section-title fade-in">À Propos de Moi</h2>
-            <div class="about-content">
-                <div class="about-image fade-in">
-                    <img src="images/autres/profil.jpg" alt="Ir Etienne">
-                </div>
-                <div class="about-text fade-in">
-                    <p>je m'appelle Etienne KALANGA MPIANA, un informaticien passionné par les nouvelles technologies et l'innovation digitale. Fort de plusieurs années d'expérience dans le domaine, je mets mon expertise au service de vos projets.</p>
-                    <p>Je suis un informaticien polyvalent avec une expertise dans l'installation et la maintenance des systèmes, incluant la maîtrise des environnements, ainsi que le dépannage matériel et logiciel.</p>
-                    <p>Ma mission est de créer des solutions technologiques qui répondent parfaitement à vos besoins, en alliant performance, esthétique et fonctionnalité.</p>
-                    <a href="pages/apropos.html" class="read-more">En savoir plus sur moi</a>
-                </div>
+            <h2 class="section-title fade-in">Présentation en Vidéo</h2>
+            <div class="video-description fade-in">
+                <p>Dans cette vidéo de présentation, je vous invite à découvrir mon parcours, mes compétences et ma passion pour les technologies innovantes. Vous y verrez un aperçu de mes réalisations et de ma méthodologie de travail.</p>
+                <p>Cette vidéo vous permettra de mieux comprendre comment je peux vous accompagner dans la concrétisation de vos projets digitaux, que ce soit pour le développement web, la maintenance informatique ou la consultation stratégique.</p>
+            </div>
+            <div class="video-container fade-in">
+                <iframe 
+                    id="presentationVideo"
+                    width="100%" 
+                    height="500" 
+                    src="https://www.youtube.com/embed/l1zyV2YaxK0?enablejsapi=1&rel=0&modestbranding=1" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div class="video-conclusion fade-in">
+                <p>N'hésitez pas à me contacter pour discuter de votre projet et découvrir comment nous pouvons collaborer pour créer des solutions technologiques qui répondent parfaitement à vos besoins.</p>
             </div>
         </div>
     </section>
@@ -1431,6 +1515,32 @@
         fadeElements.forEach(element => {
             observer.observe(element);
         });
+
+        // Gestion de la vidéo - lancement automatique au défilement
+        const videoSection = document.getElementById('video');
+        const videoIframe = document.getElementById('presentationVideo');
+
+        const videoObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Quand la section vidéo devient visible
+                    setTimeout(() => {
+                        // Convertir en URL avec autoplay
+                        const currentSrc = videoIframe.src;
+                        if (!currentSrc.includes('autoplay=1')) {
+                            const newSrc = currentSrc.includes('?') 
+                                ? `${currentSrc}&autoplay=1` 
+                                : `${currentSrc}?autoplay=1`;
+                            videoIframe.src = newSrc;
+                        }
+                    }, 500); // Petit délai pour un effet plus fluide
+                }
+            });
+        }, {
+            threshold: 0.5 // Déclenche quand 50% de la section est visible
+        });
+
+        videoObserver.observe(videoSection);
 
         // Fermer les menus de partage en cliquant ailleurs
         document.addEventListener('click', function(e) {
